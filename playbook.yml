@@ -1,0 +1,23 @@
+- hosts: localhost
+  connection: local
+
+  vars:
+    zabbix_version: 5.0
+
+  tasks:
+      
+    -   name: Check the version of OS
+        command: hostnamectl
+        register: os_check
+        ignore_errors: yes 
+
+    -   name: Fetch Minio Role
+        git:
+            repo: https://ro:X5yVWXw8NG3zWu253z6p@pwslab.org/ansible/minio-playbook.git
+            dest: /root/.ansible/roles/pwslab.minio
+            version: master
+            force: yes
+
+    -   name: Installing Minio
+        include_role:
+            name: pwslab.minio
