@@ -10,45 +10,45 @@
 
     -   name: Ensure group "minio" exists
         group:
-            name: minio
+            name: minio-user
             state: present
 
     -   name: Add the user 'minio'
         user:
-            name: minio
+            name: minio-user
             shell: /sbin/nologin
-            groups: minio
+            groups: minio-user
             append: yes
 
     -   name: Give Permissions
         file:
             path: /usr/local/bin/minio
-            owner: minio
-            group: minio
+            owner: minio-user
+            group: minio-user
             mode: '0755'
 
     -   name: Create Minio Directory
         file:
             path: /usr/local/share/minio
             state: directory
-            owner: minio
-            group: minio
+            owner: minio-user
+            group: minio-user
 
     -   name: Create Minio Directory
         file:
             path: /usr/local/share/minio
             state: directory
             recurse: yes
-            owner: minio
-            group: minio
+            owner: minio-user
+            group: minio-user
 
     -   name: Create Minio Config Directory
         file:
             path: /etc/minio
             state: directory
             recurse: yes
-            owner: minio
-            group: minio
+            owner: minio-user
+            group: minio-user
     
     -   name: Set the default config
         become: true
